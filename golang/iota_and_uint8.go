@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // Snippets from https://github.com/tuna/tunasync
 
 // Use uint8 as small capacity int.
@@ -34,5 +36,27 @@ func (s SyncStatus) String() string {
 		return "disabled"
 	default:
 		return ""
+	}
+}
+
+func (s *SyncStatus) UnmarshalJSON(v []byte) error {
+	sv := string(v)
+	switch sv {
+	case `"none"`:
+		*s = None
+	case `"failed"`:
+		*s = Failed
+	case `"success"`:
+		*s = Success
+	case `"syncing"`:
+		*s = Syncing
+	case `"pre-syncing"`:
+		*s = PreSyncing
+	case `"paused"`:
+		*s = Paused
+	case `"disable"`:
+		*s = Disabled
+	default:
+		return fmt.Errorf("Invalid status value: %s", string(v))
 	}
 }
