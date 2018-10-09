@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func MustBool(s string, defaultVal ...bool) (bool, error) {
+func MustBool(s string, defaultVal ...bool) bool {
 	getDefault := func() bool {
 		if len(defaultVal) > 0 {
 			return defaultVal[0]
