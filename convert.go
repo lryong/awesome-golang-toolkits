@@ -6,7 +6,7 @@ import (
 )
 
 func ConvertString(inter interface{}, precs ...int) string {
-	switch inter.(type) {
+	switch v := inter.(type) {
 	case string:
 		return v
 	case float64:
@@ -18,7 +18,7 @@ func ConvertString(inter interface{}, precs ...int) string {
 	case int64:
 		return strconv.FormatInt(v, 10)
 	case uint64:
-		return strconv.FormatInt(v, 10)
+		return strconv.FormatUint(v, 10)
 	case int:
 		return strconv.Itoa(v)
 	case uint:
